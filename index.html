@@ -3,7 +3,6 @@
 
     <!-- Custom PreHead code is injected here -->
     
-
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -19,7 +18,6 @@
 
         <!-- Custom PreStyle code is injected here -->
         
-
         <!-- Set the background colour of the document -->
         <style>
             body {
@@ -28,6 +26,7 @@
                 margin: 0px;
                 padding: 0px;
                 border: 0px;
+                overflow: hidden; /* Evita el desplazamiento de la página */
             }
 
             canvas {
@@ -38,6 +37,7 @@
                 margin: 0px;
                 padding: 0px;
                 border: 0px;
+                display: block; /* Evita el espacio extra debajo del canvas */
             }
             :-webkit-full-screen #canvas {
                 width: 100%;
@@ -53,6 +53,10 @@
                 margin: 0px;
                 padding: 0px;
                 border: 0px;
+                display: flex; /* Utiliza flexbox para centrar el canvas */
+                justify-content: center; /* Centra el canvas horizontalmente */
+                align-items: center; /* Centra el canvas verticalmente */
+                height: 100vh; /* Ocupa toda la altura de la ventana */
             }
             div.gm4html5_login {
                 padding: 20px;
@@ -78,7 +82,6 @@
 
         <!-- Custom PostStyle code is injected here -->
         
-
         <!-- Builtin injector for injecting flurry analytics code -->
         
     </head>
@@ -94,7 +97,6 @@
             
             <!-- Builtin injector for splash screen -->
             
-
             <!-- Create the canvas element the game draws to -->
             <canvas id="canvas" width="1920" height="1080" >
                 <p>Your browser doesn't support HTML5 canvas.</p>
@@ -106,12 +108,34 @@
 
         <!-- Builtin injector for injecting runner path -->
         
-
         <script>window.onload = GameMaker_Init;</script>
+
+        <!-- Script para redimensionar el canvas -->
+        <script>
+            // Función para redimensionar el canvas
+            function resizeCanvas() {
+                var canvas = document.getElementById('canvas');
+                var aspectRatio = 1920 / 1080; // Relación de aspecto original
+
+                // Ajustar el tamaño del canvas a la ventana
+                if (window.innerWidth / window.innerHeight < aspectRatio) {
+                    canvas.style.width = '100%';
+                    canvas.style.height = 'auto';
+                } else {
+                    canvas.style.width = 'auto';
+                    canvas.style.height = '100%';
+                }
+            }
+
+            // Llamar a la función para redimensionar el canvas al cargar la página
+            resizeCanvas();
+
+            // Añadir un event listener para redimensionar el canvas al cambiar el tamaño de la ventana
+            window.addEventListener('resize', resizeCanvas);
+        </script>
 
         <!-- Builtin injector for injecting google analytics code -->
         
-
     </body>
 
     <!-- Custom PostBody code is injected here -->
